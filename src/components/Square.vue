@@ -1,34 +1,35 @@
 <template>
-	<div class="square" @click="emitOnClick">{{this.$props.value}}</div>    
+    <div v-on:click="$emit('clickedSquare', currentId)" class="square">
+        <slot></slot>
+    </div>
 </template>
 
 <script>
 export default {
-	name: "Square",
-	methods: {
-		emitOnClick(){
-			this.$emit("clicked", this.$props.id)
-		}
-	},
-	props: {
-		id: String,
-		value: String
-	},
+    name: "Square",
+    props: {
+        id: String,
+    },
+    data() {
+        return {
+            currentId : this.id,
+        }
+    }
 }
 </script>
 
 <style>
-	.square {
-		width: 100px;
-		height: 100px;
-		border: 1px solid black;
-		font-size: 45px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+    .square {
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+        font-size: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-	.square:hover{
-		background-color: grey;
-	}
+    .square:hover{
+        background-color: grey;
+    }
 </style>
